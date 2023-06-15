@@ -150,22 +150,22 @@ def compare_byte_to_byte(img1, img2):
     img2_stats = os.stat(img2)
     
     if (img1_stats.st_size != img2_stats.st_size):
-        print "Error: images generated with same seed are NOT equal (different size).\n"
-        print "Aborting tests.\n"
+        print("Error: images generated with same seed are NOT equal (different size).\n")
+        print("Aborting tests.\n")
         sys.exit(1)
     
-    reader_one = open(img1)
-    reader_two = open(img2)
+    reader_one = open(img1, "rb")
+    reader_two = open(img2, "rb")
     
     byte_from_one = reader_one.read(1)
     byte_from_two = reader_two.read(1)
     
     while ((byte_from_one != "") and (byte_from_two != "")):
         if (byte_from_one != byte_from_two):
-            print "Error: images generated with same seed are NOT equal (different content).\n"
+            print("Error: images generated with same seed are NOT equal (different content).\n")
             reader_one.close()
             reader_two.close()
-            print "Aborting tests.\n"
+            print("Aborting tests.\n")
             sys.exit(1)
         byte_from_one = reader_one.read(1)
         byte_from_two = reader_two.read(1)
@@ -176,19 +176,16 @@ def compare_byte_to_byte(img1, img2):
 def main():
 	# Check the executable exists
 	if not (os.path.isfile(cli_exec)):
-		print "Executable does not exist. Please compile before testing.\n"
-		print "To compile, go to home directory, and launch \"install.sh\" script, \
-			 or go to dev/integration/8bH_cli and execute \"make\"\n"
-		print "Aborting test\n"
+		print("Executable does not exist. Please compile before testing.\n")
+		print("To compile, go to home directory, and launch \"install.sh\" script,r go to dev/integration/8bH_cli and execute \"make\"\n")
+		print("Aborting test\n")
 		sys.exit(1)
 		
 	if (o_noperm_dir == "/path/to/no_perm/dir"):
-		print "WARNING: the variable \"o_noperm_dir\" has not been modified by the user.\n \
-Test will continue to run, but the test that checks that no permissions directory\n \
-makes the app fail won't be correct. To properly test all possibilities, modify\n \
-that variable inside \"python_uat.py\" to contain a path to a directory with no permissions.\n\n"
 
-	print "STARTING TESTS ... \n\n"
+		print("WArning")
+
+	print("STARTING TESTS ... \n\n")
 	time.sleep(5) # The only purpose of this wait is to give user time to read all messages printed up to this point.
 	
 	#devnull = open (os.devnull, "w") # Use the null device to discard the commands output
@@ -198,10 +195,10 @@ that variable inside \"python_uat.py\" to contain a path to a directory with no 
 		#ret_value = subprocess.call(command, stdout=devnull)
 		ret_value = subprocess.call(command)
 		if (ret_value != 0):
-			print "\n"*4 + "="*10
-			print "Unexpected error when launching the following command:\n"
-			print str(command) + "\n"
-			print "It should WORK, but returned a failure code. Aborting test\n"
+			# print(f"{"\n"*4 + "="*10
+			# print "Unexpected error when launching the following command:\n"
+			# print(f"{str(command) + "\n"
+			# print "It should WORK, but returned a failure code. Aborting test\n"
 			#devnull.close()
 			sys.exit(1)
 
@@ -210,10 +207,10 @@ that variable inside \"python_uat.py\" to contain a path to a directory with no 
 		#ret_value = subprocess.call(command, stdout=devnull)
 		ret_value = subprocess.call(command)
 		if (ret_value == 0):
-			print "\n"*4 + "="*10
-			print "Unexpected error when launching the following command:\n"
-			print str(command) + "\n"
-			print "It should FAIL, but returned a successfull code. Aborting test\n"
+			# print "\n"*4 + "="*10
+			# print "Unexpected error when launching the following command:\n"
+			# print str(command) + "\n"
+			# print "It should FAIL, but returned a successfull code. Aborting test\n"
 			#devnull.close()
 			sys.exit(1)
 
@@ -224,8 +221,8 @@ that variable inside \"python_uat.py\" to contain a path to a directory with no 
 	compare_byte_to_byte(o_dir + name + png_ext, o_dir + name2 + png_ext)
 	#devnull.close()
     
-	print "\n"*4 + "="*10
-	print "8 BIT HUBBLE USER ACCEPTANCE TEST FINISHED SUCCESSFULLY\n"	
+	# print "\n"*4 + "="*10
+	print("8 BIT HUBBLE USER ACCEPTANCE TEST FINISHED SUCCESSFULLY\n")
 
 
 

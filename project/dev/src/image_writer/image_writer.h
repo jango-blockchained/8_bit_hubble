@@ -40,8 +40,7 @@
 #include "../status_reporter/status_reporter.h"
 #include "../canvas/canvas.h"
 
-enum status write_image(struct canvas *ptr_c, char *file_path, 
-	 char *file_name);
+enum status write_image(struct canvas *ptr_c, char *file_path, char *file_name);
 
 #endif
 
